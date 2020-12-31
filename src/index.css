@@ -7,6 +7,7 @@ body {
     "Fira Sans", "Droid Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: default;
 }
 
 code {
@@ -113,4 +114,22 @@ form {
   margin-top: 100px;
   display: flex;
   justify-content: center;
+}
+
+.footer p {
+  font-family: "Helvetica Neue";
+  font-weight: 500;
+}
+a:link {
+  color: #5c49d3;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:visited {
+  color: #5c49d3;
+  text-decoration: none;
+}
+a:hover {
+  color: #5c49d3;
+  text-decoration: underline;
 }
