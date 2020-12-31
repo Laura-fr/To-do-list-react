@@ -6,7 +6,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// imoport icônes:
+// import icônes:
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faListAlt } from "@fortawesome/free-solid-svg-icons";
 import { faListAlt as farListAlt } from "@fortawesome/free-regular-svg-icons";
@@ -14,18 +14,46 @@ library.add(faTrash, faListAlt, farListAlt);
 
 function App() {
   const [tasks, setTasks] = useState([
-    { title: "Faire les courses", isDone: false },
-    { title: "Arroser les plantes", isDone: true },
+    { title: "Pay bills", isDone: false },
+    { title: "Make a to do list", isDone: true },
   ]);
 
   const [newTaskInput, setNewTaskInput] = useState("");
   return (
     <div>
       <Header />
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+
+          // Add a new task
+          const newTasks = [...tasks];
+          newTasks.push({ title: newTaskInput, isDone: false });
+          setTasks(newTasks);
+
+          // clean input
+          setNewTaskInput("");
+        }}
+      >
+        <input
+          className="add-task"
+          type="text"
+          placeholder="new task"
+          value={newTaskInput}
+          onChange={(event) => {
+            const value = event.target.value;
+            setNewTaskInput(value);
+          }}
+        />
+        <button className="button-add" type="submit">
+          Add Task
+        </button>
+      </form>
+
       <div className="tasks">
         {tasks.map((task, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="task">
               <input
                 type="checkbox"
                 checked={task.isDone}
@@ -57,34 +85,6 @@ function App() {
             </div>
           );
         })}
-
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-
-            // Ajouter une nouvelle tâche
-            const newTasks = [...tasks];
-            newTasks.push({ title: newTaskInput, isDone: false });
-            setTasks(newTasks);
-
-            // vider l'input
-            setNewTaskInput("");
-          }}
-        >
-          <input
-            className="add-task"
-            type="text"
-            placeholder="new task"
-            value={newTaskInput}
-            onChange={(event) => {
-              const value = event.target.value;
-              setNewTaskInput(value);
-            }}
-          />
-          <button className="button-add" type="submit">
-            Add Task
-          </button>
-        </form>
       </div>
       <Footer />
     </div>
