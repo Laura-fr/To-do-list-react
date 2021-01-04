@@ -10,5 +10,5 @@ This is a simple do do list app made with react.
 
 ## Commands
 
-- `yarn add`
+- `yarn install`
 - `yarn start`
