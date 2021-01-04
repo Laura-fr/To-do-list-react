@@ -1,6 +1,6 @@
 # To Do List
 
-This is a simple dodo list app made with react.
+This is a simple do do list app made with react.
 
 ## Features
 
