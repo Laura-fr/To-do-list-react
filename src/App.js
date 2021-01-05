@@ -6,19 +6,26 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// import icônes:
+// icons import:
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faListAlt } from "@fortawesome/free-solid-svg-icons";
 import { faListAlt as farListAlt } from "@fortawesome/free-regular-svg-icons";
 library.add(faTrash, faListAlt, farListAlt);
 
 function App() {
-  const [tasks, setTasks] = useState([
+  const list = JSON.parse(localStorage.getItem("list")) || [
     { title: "Pay bills", isDone: false },
     { title: "Make a to do list", isDone: true },
-  ]);
+  ];
 
+  const [tasks, setTasks] = useState(list);
   const [newTaskInput, setNewTaskInput] = useState("");
+
+  const updateTasks = (newTasks) => {
+    setTasks(newTasks);
+    localStorage.setItem("list", JSON.stringify(newTasks));
+  };
+
   return (
     <div>
       <Header />
@@ -29,7 +36,8 @@ function App() {
           // Add a new task
           const newTasks = [...tasks];
           newTasks.push({ title: newTaskInput, isDone: false });
-          setTasks(newTasks);
+
+          updateTasks(newTasks);
 
           // clean input
           setNewTaskInput("");
@@ -57,24 +65,23 @@ function App() {
               <input
                 type="checkbox"
                 checked={task.isDone}
-                onClick={() => {
+                onChange={() => {
                   const newTasks = [...tasks];
                   // isDone est égal à l'inverse de lui même
                   newTasks[index].isDone = !newTasks[index].isDone;
 
-                  setTasks(newTasks);
+                  updateTasks(newTasks);
                 }}
               />
-              <span className={task.isDone === true ? "checked" : ""}>
-                {task.title}
-              </span>
+              <span className={task.isDone ? "checked" : ""}>{task.title}</span>
+
               <button
                 className="delete-button"
                 onClick={() => {
                   const newTasks = [...tasks];
                   // on retire un élement à partir de index
                   newTasks.splice(index, 1);
-                  setTasks(newTasks);
+                  updateTasks(newTasks);
                 }}
               >
                 <FontAwesomeIcon
