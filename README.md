@@ -1,4 +1,4 @@
-# To Do List
+# To Do List 📝
 
 This is a simple do do list app made with react.
 
