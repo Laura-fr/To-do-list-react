@@ -9,6 +9,9 @@ This is a simple do do list app made with react.
 - Delete a task
 - Tasks saved with localStorage
 
+## Ideas
+- Add a dark mode feature to use styled-components
+
 ## Commands
 
 - `yarn install`
